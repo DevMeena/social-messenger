@@ -2,7 +2,7 @@ const port = process.env.PORT || 8900;
 
 const io = require("socket.io")(port, {
   cors: {
-    origin:"https://connectbook.netlify.com/",
+    origin:"http://localhost:3000",
   },
 });
 
@@ -22,7 +22,7 @@ const getUser = (userId) => {
 
 io.on("connection", (socket) => {
   // when user connect
-  console.log("A user connected");
+  // console.log("A user connected");
   // get userId sent by user and add socket Id along with it in users.
   socket.on("addUser", userId => {
     addUser(userId, socket.id);
@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
 
   // when user disconnect
   socket.on("disconnect", () => {
-    console.log('A user disconnected!');
+    // console.log('A user disconnected!');
     removeUser(socket.id);
     io.emit("getUsers", users);
   })
